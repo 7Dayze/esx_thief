@@ -147,11 +147,17 @@ Citizen.CreateThread(function()
 				local target_id = GetPlayerServerId(target)
 				
 				IsAbleToSteal(target_id, function(err)
-					if(not err)then
-						OpenStealMenu(target, target_id)
-					else
-						ESX.ShowNotification(err)
-					end
+   					if(not err)then
+       					ESX.TriggerServerCallback('resource:GetConnectedCops', function(CopsConnected)
+            			if CopsConnected >= 2 then
+                			OpenStealMenu(target, target_id)
+            			else
+                			ESX.ShowNotification("There must be 2 or more cops on to rob a player")
+            			end 
+        			end)
+    				else
+        				ESX.ShowNotification(err)
+    				end
 				end)
 			elseif distance < 20 and distance > 2.0 then
 				ESX.ShowNotification(_U('too_far'))
