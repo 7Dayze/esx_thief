@@ -1,5 +1,5 @@
-# fxserver-esx_thief
-ESX Thief modified to require police online
+# ESX Thief modified to require police online
+FXServer ESX Thief
 
 Rework from the original esx_thief.
 
