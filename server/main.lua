@@ -24,6 +24,18 @@ ESX.RegisterServerCallback('esx_thief:getOtherPlayerData', function(source, cb, 
 	cb(data)
 end)
 
+ESX.RegisterServerCallback('resource:GetConnectedCops', function(source, cb)
+    local xPlayers = ESX.GetPlayers()
+    local CopsConnected = 0
+    for i = 1, #xPlayers, 1 do
+        local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
+        if xPlayer.job.name == 'police' and xPlayer.job.grade ~= 69 then
+            CopsConnected = CopsConnected + 1
+        end
+    end
+    cb(CopsConnected)
+end)
+
 RegisterServerEvent('esx_thief:stealPlayerItem')
 AddEventHandler('esx_thief:stealPlayerItem', function(target, itemType, itemName, amount)
 	local _source = source
